@@ -37,7 +37,7 @@ pipeline{
         stage('Install Dependencies') {
             steps {
                 script {
-                    def npmInstall = sh(script: 'npm install', returnStatus: true)
+                    def npmInstall = sh(script: 'npm install --legacy-peer-deps', returnStatus: true)
                     if (npmInstall != 0) {
                         error "npm install failed"
                     }
