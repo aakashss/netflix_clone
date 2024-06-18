@@ -38,6 +38,7 @@ pipeline{
             steps {
                 sh "npm install"
                 sh "npm audit fix"
+                sh "npm fund"
             }
         }
         stage('OWASP DP SCAN') {
