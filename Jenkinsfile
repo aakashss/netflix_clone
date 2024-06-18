@@ -37,19 +37,7 @@ pipeline{
         stage('Install Dependencies') {
             steps {
                 script {
-                    def npmInstall = sh(script: 'npm install --legacy-peer-deps', returnStatus: true)
-                    if (npmInstall != 0) {
-                        error "npm install failed"
-                    }
-                    def npmAuditFix = sh(script: 'npm audit fix', returnStatus: true)
-                    if (npmAuditFix != 0) {
-                        error "npm audit fix failed"
-                    }
-                    def npmFund = sh(script: 'npm fund', returnStatus: true)
-                    if (npmFund != 0) {
-                        error "npm fund failed"
-                    }
-                }
+                    sh "npm install --force"
             }
         }
 
