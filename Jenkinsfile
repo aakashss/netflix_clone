@@ -36,11 +36,23 @@ pipeline{
         }
         stage('Install Dependencies') {
             steps {
-                sh "npm install"
-                sh "npm audit fix"
-                sh "npm fund"
+                script {
+                    def npmInstall = sh(script: 'npm install', returnStatus: true)
+                    if (npmInstall != 0) {
+                        error "npm install failed"
+                    }
+                    def npmAuditFix = sh(script: 'npm audit fix', returnStatus: true)
+                    if (npmAuditFix != 0) {
+                        error "npm audit fix failed"
+                    }
+                    def npmFund = sh(script: 'npm fund', returnStatus: true)
+                    if (npmFund != 0) {
+                        error "npm fund failed"
+                    }
+                }
             }
         }
+
         stage('OWASP DP SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'owasp-dp-check'
