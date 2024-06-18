@@ -38,6 +38,7 @@ pipeline{
             steps {
                 script {
                     sh "npm install --force"
+                }
             }
         }
 
