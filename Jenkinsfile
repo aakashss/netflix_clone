@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'master', url: 'https://github.com/AmanPathak-DevOps/Netflix-Clone-K8S-End-to-End-Project.git'
+                git branch: 'master', url: 'https://github.com/aakashss/netflix_clone.git'
             }
         }
         stage("Sonarqube Analysis"){
@@ -56,7 +56,7 @@ pipeline{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker system prune -f"
                        sh "docker container prune -f"
-                       sh "docker build --build-arg TMDB_V3_API_KEY=8b174e589e2f03f9fd8123907bd7800c -t netflix ."
+                       sh "docker build --build-arg TMDB_V3_API_KEY=11622ee9fa92a8149355a740bb47d6fa -t netflix ."
                     }
                 }
             }
@@ -65,8 +65,8 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker tag netflix avian19/netflix:latest "
-                       sh "docker push avian19/netflix:latest "
+                       sh "docker tag netflix aakashss/netflix:latest"
+                       sh "docker push aakashss/netflix:latest"
                     }
                 }
             }
@@ -98,7 +98,7 @@ pipeline{
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
                 "URL: ${env.BUILD_URL}<br/>",
-            to: 'aman07pathak@gmail.com',
+            to: 'aakash9757@gmail.com',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
