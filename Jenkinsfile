@@ -37,8 +37,8 @@ pipeline{
         stage("Install Dependency"){
             steps{
                 script {
-                    sh 'npm install'
-                    sh 'npm audit fix'
+                    sh 'sudo npm install'
+                    sh 'sudo npm audit fix'
                 }
             }
         }
