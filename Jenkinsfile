@@ -34,13 +34,6 @@ pipeline{
                 }
             } 
         }
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh "npm install --force"
-                }
-            }
-        }
 
         stage('OWASP DP SCAN') {
             steps {
