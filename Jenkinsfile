@@ -34,7 +34,13 @@ pipeline{
                 }
             } 
         }
-
+        stage("Install Dependency"){
+            steps{
+                script {
+                    sh 'npm install --force'
+                }
+            }
+        }
         stage('OWASP DP SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'owasp-dp-check'
