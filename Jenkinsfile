@@ -37,7 +37,8 @@ pipeline{
         stage("Install Dependency"){
             steps{
                 script {
-                    sh 'npm install --force'
+                    sh 'npm install'
+                    sh 'npm audit fix'
                 }
             }
         }
