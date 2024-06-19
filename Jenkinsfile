@@ -39,7 +39,6 @@ pipeline{
                 script {
                     sh 'npm install --force'
                     sh 'npm audit fix'
-                    sh 'npm run clean'
                     sh 'npm install @mui/base @mui/core'
                 }
             }
