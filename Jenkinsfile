@@ -37,9 +37,10 @@ pipeline{
         stage("Install Dependency"){
             steps{
                 script {
-                    sh 'npm install'
+                    sh 'npm install --force'
                     sh 'npm audit fix'
                     sh 'npm run clean'
+                    sh 'npm install @mui/base @mui/core'
                 }
             }
         }
