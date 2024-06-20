@@ -37,8 +37,7 @@ pipeline{
         stage("Install Dependency"){
             steps{
                 script {
-                    sh 'sudo npm install'
-                    sh 'sudo npm audit fix'
+                    sh 'npm install'
                 }
             }
         }
@@ -82,6 +81,11 @@ pipeline{
         stage('Deploy to Kubernetes'){
             steps{
                 script{
+                    try{
+                    sh 'cat /etc/kubernetes/config.yaml'
+                    } catch (Exception e){
+                        echo "File not found"
+                        }
                     dir('Kubernetes') {
                         withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                                 sh 'kubectl apply -f deployment.yml'
